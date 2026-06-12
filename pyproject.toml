@@ -1,0 +1,35 @@
+[project]
+name = "drf-exam"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "palamar",email = "defenderxz229@gmail.com"}
+]
+requires-python = "^3.12"
+dependencies = [
+    "django (>=6.0.6,<7.0.0)",
+    "djangorestframework (>=3.17.1,<4.0.0)",
+    "djangorestframework-simplejwt (>=5.5.1,<6.0.0)",
+    "psycopg2-binary (>=2.9.12,<3.0.0)",
+    "redis (>=8.0.0,<9.0.0)",
+    "celery (>=5.6.3,<6.0.0)",
+    "django-environ (>=0.13.0,<0.14.0)",
+    "pillow (>=12.2.0,<13.0.0)",
+    "django-cors-headers (>=4.9.0,<5.0.0)",
+    "requests (>=2.34.2,<3.0.0)",
+    "drf-spectacular (>=0.29.0,<0.30.0)",
+    "djangorestframework-stubs (>=3.17.0,<4.0.0)",
+    "celery-types (>=0.26.0,<0.27.0)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "isort (>=8.0.1,<9.0.0)"
+]
