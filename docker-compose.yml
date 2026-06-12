@@ -1,0 +1,52 @@
+services:
+#  db:
+#    image: postgres:16
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    env_file:
+#      - .env
+#    ports:
+#      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  app:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    depends_on:
+      - redis
+    command: python manage.py runserver 0.0.0.0:8000
+
+  celery:
+    build: .
+    command: celery -A configs worker --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - app
+
+  celery-beat:
+    build: .
+    command: celery -A configs beat --loglevel=info
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - celery
+
+volumes:
+    postgres_data:

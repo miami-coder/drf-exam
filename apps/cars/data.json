@@ -1,0 +1,37 @@
+[
+  {
+    "model": "cars.make",
+    "pk": 1,
+    "fields": { "name": "Audi" }
+  },
+  {
+    "model": "cars.make",
+    "pk": 2,
+    "fields": { "name": "BMW" }
+  },
+  {
+    "model": "cars.make",
+    "pk": 3,
+    "fields": { "name": "Mercedes" }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 1,
+    "fields": { "name": "A6", "make": 1 }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 2,
+    "fields": { "name": "RS6", "make": 1 }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 3,
+    "fields": { "name": "X6", "make": 2 }
+  },
+  {
+    "model": "cars.carmodel",
+    "pk": 4,
+    "fields": { "name": "E-Class", "make": 3 }
+  }
+]
