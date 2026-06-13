@@ -1,0 +1,716 @@
+{
+  "info": {
+    "_postman_id": "14ae5e3c-1ba9-4ec8-a743-409219f7df2d",
+    "name": "drf-exam",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50462194",
+    "_collection_link": "https://go.postman.co/collection/50462194-14ae5e3c-1ba9-4ec8-a743-409219f7df2d?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"eller_premium2\",\n    \"email\": \"seller@example.com\",\n    \"password\": \"Password123!\",\n    \"phone\": \"+380971234568\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/register/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "res = pm.response.json()",
+                  "pm.environment.set(\"access\", res.access);",
+                  "pm.environment.set(\"refresh\", res.refresh);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/login/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "me",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/auth/me/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "me",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{refresh}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4MTM3MjIzOCwiaWF0IjoxNzgxMjg1ODM4LCJqdGkiOiJjNDA5OTFlNGQ4ZmM0MmNkODEyOGI5MWJmNjMwNjgzZiIsInVzZXJfaWQiOiIyIn0.zyP1LT_9SPXJXEKUVK5iNkSIXUn8cjLgrM7hIQA-Dkw\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/token/refresh/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "token",
+                "refresh",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-manager",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"kyiv_manager_1\",\n    \"email\": \"manager1@autoria.com\",\n    \"password\": \"ManagerPassword123!\",\n    \"phone\": \"+380441111111\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/create-manager/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "create-manager",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4MTM3ODAyMiwiaWF0IjoxNzgxMjkxNjIyLCJqdGkiOiJiZmY2ZTIyNDMzNzk0ODI2YTBjMTY4OWNjZmU5ODJhNSIsInVzZXJfaWQiOiIyIn0.p7gaXz3xatTp0zUmTCDWSFwWcy4rdFPTQldf6I0ee_c\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/logout/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "logout",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "userToPremiumById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/auth/users/7/premium/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "auth",
+                "users",
+                "7",
+                "premium",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "cars",
+      "item": [
+        {
+          "name": "getMakes",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/cars/makes/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                "makes",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getModelsByMakes",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/cars/makes/1/models/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                "makes",
+                "1",
+                "models",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "createCar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"make\": 1,\n    \"model\": 1,\n    \"year\": 2022,\n    \"mileage\": 15000,\n    \"description\": \"Продам Audi A6 в ідеальному стані.\",\n    \"price\": \"50000.00\",\n    \"currency\": \"USD\",\n    \"city\": \"Київ\",\n    \"region\": \"Київська обл.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/cars/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getActiveCarsList",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/cars/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getCarDetail",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/cars/1/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "patchCar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price\": \"83500.00\",\n    \"description\": \"Терміново! Знизив ціну, реальному покупцю торг біля капота.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/cars/1/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deleteCar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/cars/1/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "cars",
+                "1",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "moder",
+      "item": [
+        {
+          "name": "getPendingModer",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/moderation/pending/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "moderation",
+                "pending",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "moderateById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/moderation/cars/13/moderate/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "moderation",
+                "cars",
+                "13",
+                "moderate",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getLogsById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/moderation/cars/13/logs/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "moderation",
+                "cars",
+                "13",
+                "logs",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "price",
+      "item": [
+        {
+          "name": "getRates",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/pricing/rates",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "pricing",
+                "rates"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refreshRates",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/pricing/rates/refresh",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "pricing",
+                "rates",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "stats",
+      "item": [
+        {
+          "name": "viewAdsById",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiUrl}}/stats/2/view/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "stats",
+                "2",
+                "view",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "premiumStatsById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiUrl}}/stats/14/",
+              "host": [
+                "{{apiUrl}}"
+              ],
+              "path": [
+                "stats",
+                "14",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
