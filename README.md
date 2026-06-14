@@ -38,6 +38,8 @@ docker compose exec app python manage.py migrate
 ```
 
 **Створити суперкористувача при потребі. В бд він є**
+username: admin,
+pass: admin
 ```bash
 docker compose exec app python manage.py createsuperuser
 ```
